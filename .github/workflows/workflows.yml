@@ -1,0 +1,23 @@
+name: Set custom index.html
+
+on:
+  push:
+    branches:
+      - main  # Change this to the appropriate branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Rename main.html to index.html
+        run: mv main.html index.html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .  # Change this if your files are in a different directory
